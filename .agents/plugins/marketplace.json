@@ -1,0 +1,20 @@
+{
+  "name": "permission-request-chime",
+  "interface": {
+    "displayName": "Permission Request Chime"
+  },
+  "plugins": [
+    {
+      "name": "permission-request-chime",
+      "source": {
+        "source": "local",
+        "path": "./plugins/permission-request-chime"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

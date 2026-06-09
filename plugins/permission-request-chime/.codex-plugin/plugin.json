@@ -1,0 +1,21 @@
+{
+  "name": "permission-request-chime",
+  "version": "0.1.0",
+  "description": "Play a local sound whenever Codex creates a permission request.",
+  "author": {
+    "name": "Bowen"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Permission Request Chime",
+    "shortDescription": "Play a chime when Codex asks for permission.",
+    "longDescription": "Permission Request Chime bundles a Codex PermissionRequest lifecycle hook that plays a local macOS sound as soon as an approval request is created. It is designed for users who miss permission popups when there is no audible cue.",
+    "developerName": "Bowen",
+    "category": "Productivity",
+    "capabilities": [
+      "Hooks",
+      "Local automation"
+    ],
+    "defaultPrompt": "Help me configure the permission request chime."
+  }
+}

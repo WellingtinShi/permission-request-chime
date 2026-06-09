@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh -lc 'sound=\"${CODEX_PERMISSION_CHIME_SOUND:-/System/Library/Sounds/Glass.aiff}\"; if [ -r \"$sound\" ] && command -v afplay >/dev/null 2>&1; then (afplay \"$sound\" >/dev/null 2>&1 &); elif command -v osascript >/dev/null 2>&1; then (osascript -e \"beep 1\" >/dev/null 2>&1 &); else printf \"\\a\" >/dev/tty 2>/dev/null || true; fi'",
+            "timeout": 3,
+            "statusMessage": "Playing permission request chime"
+          }
+        ]
+      }
+    ]
+  }
+}
