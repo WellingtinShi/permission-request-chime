@@ -4,13 +4,13 @@
 
 普通用户推荐固定到 `v0.2.0` 或更新版本：
 
-```bash
+```text
 codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
 ```
 
 开发或跟随最新 `main` 分支时，可以省略 `--ref`：
 
-```bash
+```text
 codex plugin marketplace add WellingtinShi/permission-request-chime
 ```
 

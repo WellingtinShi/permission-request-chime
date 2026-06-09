@@ -34,7 +34,7 @@ Do not move published tags casually.
 
 After the public repository is updated, verify a fresh install:
 
-```bash
+```text
 codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
 ```
 

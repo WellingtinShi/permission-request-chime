@@ -26,13 +26,13 @@ Permission Request Chime 是一个 Codex 插件 marketplace，现在包含两个
 
 推荐使用固定版本：
 
-```bash
+```text
 codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
 ```
 
 如果你想跟随最新开发版本，可以省略 `--ref`：
 
-```bash
+```text
 codex plugin marketplace add WellingtinShi/permission-request-chime
 ```
 

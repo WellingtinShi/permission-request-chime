@@ -22,7 +22,7 @@ Windows `SystemSounds.Asterisk` sound. If that fails, it falls back to
 
 Add the marketplace:
 
-```bash
+```text
 codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
 ```
 

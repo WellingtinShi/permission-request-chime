@@ -21,7 +21,7 @@ terminal bell.
 
 Add the marketplace:
 
-```bash
+```text
 codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
 ```
 

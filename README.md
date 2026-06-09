@@ -27,13 +27,13 @@ Install only the version that matches your OS:
 
 Run this pinned stable install command:
 
-```bash
+```text
 codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
 ```
 
 For development or latest changes, omit the `--ref` flag:
 
-```bash
+```text
 codex plugin marketplace add WellingtinShi/permission-request-chime
 ```
 
