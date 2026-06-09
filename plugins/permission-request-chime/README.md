@@ -1,69 +1,46 @@
-# Permission Request Chime
+# Permission Request Chime (macOS)
 
-[English](README.md) | [简体中文](../../README.zh-CN.md)
+[Repository README](../../README.md) | [中文说明](../../README.zh-CN.md)
 
-Permission Request Chime is a Codex plugin that plays a short local sound
-whenever Codex creates a permission request.
+This is the macOS version of Permission Request Chime. It plays a local macOS
+sound whenever Codex creates a permission request.
+
+Windows users should install `permission-request-chime-windows` instead.
 
 ## Design
 
 The plugin uses Codex's `PermissionRequest` lifecycle hook instead of watching
-the screen. The hook matches every permission request and launches a tiny shell
-command that plays `/System/Library/Sounds/Glass.aiff` in the background.
+the screen. The hook matches every permission request and launches a small
+`/bin/sh` command.
 
-This means the plugin reacts to Codex's own approval event, not to fragile UI
-details such as window titles or screen OCR.
+The default command plays `/System/Library/Sounds/Glass.aiff` with `afplay`.
+If `afplay` is unavailable, it falls back to `osascript -e "beep 1"`, then to a
+terminal bell.
 
 ## Install
 
-Choose one of these install methods.
-
-### Option 1: Run In Terminal
-
-For most users, run this pinned stable install command in Terminal:
+Add the marketplace:
 
 ```bash
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.1.0
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
 ```
 
-For development or latest changes, omit the `--ref` flag:
-
-```bash
-codex plugin marketplace add WellingtinShi/permission-request-chime
-```
-
-Do not run both commands. The first one pins the marketplace to a stable release
-tag. The second one tracks the repository's default branch.
-
-### Option 2: Ask Codex To Run It
-
-You can also paste this into a local Codex conversation and let Codex run the
-command for you:
+Then open the Codex plugin directory and install:
 
 ```text
-Please install the Permission Request Chime plugin marketplace by running:
-
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.1.0
+permission-request-chime
 ```
 
-Codex may ask for permission before running the command. Approve the request if
-you want Codex to add this plugin marketplace.
-
-### Finish Installation
-
-The marketplace command only adds this repository as a plugin source. After it
-finishes, install `permission-request-chime` from the Codex plugin directory and
-restart Codex. Because the plugin bundles a command hook, Codex will ask you to
-review and trust the hook before it runs.
+Restart Codex after installation. Because the plugin bundles a command hook,
+Codex will ask you to review and trust the hook before it runs.
 
 ## Customize
 
-By default the hook plays:
+Set `CODEX_PERMISSION_CHIME_SOUND` before starting Codex:
 
-`/System/Library/Sounds/Glass.aiff`
-
-To use another sound, edit `hooks/hooks.json` and change the path, or start
-Codex with `CODEX_PERMISSION_CHIME_SOUND` set to another readable audio file.
+```bash
+export CODEX_PERMISSION_CHIME_SOUND=/System/Library/Sounds/Ping.aiff
+```
 
 Useful macOS built-in options:
 
@@ -75,15 +52,15 @@ Useful macOS built-in options:
 ## Security
 
 The default hook command only attempts to play a local sound file, run a system
-beep, or emit a terminal bell. Codex requires explicit trust before
-non-managed command hooks can run.
+beep, or emit a terminal bell. Codex requires explicit trust before non-managed
+command hooks can run.
+
+Review `hooks/hooks.json` before trusting it.
 
 ## Limitations
 
-- This targets local Codex sessions that load lifecycle hooks.
-- It depends on hooks being enabled in Codex configuration.
-- The default sound path is macOS-specific.
+- macOS only.
+- Requires local Codex sessions that load lifecycle hooks.
+- Depends on hooks being enabled in Codex configuration.
 - System mute, focus mode, or an unavailable audio device can still prevent
   audible playback.
-- The first run requires hook trust, which is intentional for local command
-  safety.

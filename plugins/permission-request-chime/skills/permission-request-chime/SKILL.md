@@ -1,13 +1,13 @@
 ---
 name: permission-request-chime
-description: Explain and tune the local Permission Request Chime plugin for Codex permission approval sounds.
+description: Explain and tune the macOS Permission Request Chime plugin for Codex permission approval sounds.
 ---
 
-# Permission Request Chime
+# Permission Request Chime (macOS)
 
 This plugin is automatic once installed and enabled. It uses Codex's
-`PermissionRequest` lifecycle hook to play a local sound whenever Codex creates
-an approval request.
+`PermissionRequest` lifecycle hook to play a local macOS sound whenever Codex
+creates an approval request.
 
 ## How it works
 
@@ -33,6 +33,9 @@ Common macOS sound paths include:
 After changing the hook command, restart Codex and review/trust the updated hook.
 
 ## Notes
+
+This is the macOS plugin. Windows users should install
+`permission-request-chime-windows`.
 
 Non-managed command hooks must be reviewed and trusted before they run. If the
 plugin is enabled but no sound plays, open the hook review UI and trust the

@@ -1,47 +1,58 @@
 # Publishing
 
 This repository is structured as a Codex plugin marketplace. The marketplace
-file is `.agents/plugins/marketplace.json`, and the plugin bundle is under
-`plugins/permission-request-chime/`.
+file is `.agents/plugins/marketplace.json`, and it exposes two plugin bundles:
+
+- `plugins/permission-request-chime/` for macOS.
+- `plugins/permission-request-chime-windows/` for Windows.
 
 ## Public GitHub Repository
 
-Create a public GitHub repository:
+Repository:
 
 ```text
 WellingtinShi/permission-request-chime
 ```
 
-Then push this local repository:
+## Release Flow
+
+`v0.1.0` was the original macOS-only release. Use `v0.2.0` or newer for the
+macOS / Windows split.
+
+To publish a new stable release:
 
 ```bash
-git remote add origin git@github.com:WellingtinShi/permission-request-chime.git
-git push -u origin main
-git push origin v0.1.0
+git push origin main
+git tag v0.2.0
+git push origin v0.2.0
 ```
 
-If SSH is not configured, use the HTTPS remote instead:
-
-```bash
-git remote add origin https://github.com/WellingtinShi/permission-request-chime.git
-```
+If the tag already exists locally or remotely, inspect it before changing it.
+Do not move published tags casually.
 
 ## Install Verification
 
-After the public repository exists, verify a fresh install:
+After the public repository is updated, verify a fresh install:
 
 ```bash
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.1.0
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
 ```
 
-Then install `permission-request-chime` from the Codex plugin directory, restart
-Codex, review and trust the hook, and trigger a harmless permission request.
+Then install the matching plugin from the Codex plugin directory:
+
+- macOS: `permission-request-chime`
+- Windows: `permission-request-chime-windows`
+
+Restart Codex, review and trust the hook, and trigger a harmless permission
+request.
 
 ## Release Checklist
 
 - Validate JSON files with `jq`.
-- Validate the hook shell command with `sh -n`.
-- Run the plugin validator when its Python dependencies are available.
+- Validate the macOS hook shell command with `sh -n`.
+- Review the Windows PowerShell hook command manually or test on Windows.
+- Run the plugin validator for both plugin directories.
 - Confirm the public repository contains `.agents/plugins/marketplace.json`.
-- Confirm `v0.1.0` points at the intended release commit.
+- Confirm both plugin entries appear in the marketplace.
+- Confirm the release tag points at the intended commit.
 - Test installation from the pinned tag.

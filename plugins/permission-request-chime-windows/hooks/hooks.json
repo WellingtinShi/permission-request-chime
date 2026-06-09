@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"$ErrorActionPreference='SilentlyContinue'; $sound=$env:CODEX_PERMISSION_CHIME_SOUND; if ($sound -and (Test-Path $sound)) { try { (New-Object System.Media.SoundPlayer $sound).PlaySync(); exit 0 } catch {} }; try { [System.Media.SystemSounds]::Asterisk.Play(); Start-Sleep -Milliseconds 700 } catch { [Console]::Beep(880,250) }\"",
+            "timeout": 3,
+            "statusMessage": "Playing Windows permission request chime"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "permission-request-chime-windows",
+  "version": "0.2.0",
+  "description": "Play a local Windows sound whenever Codex creates a permission request.",
+  "author": {
+    "name": "Bowen"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Permission Request Chime (Windows)",
+    "shortDescription": "Play a Windows chime when Codex asks for permission.",
+    "longDescription": "Permission Request Chime (Windows) bundles a Codex PermissionRequest lifecycle hook that plays a local Windows system sound as soon as an approval request is created. Install this version on Windows. macOS users should install Permission Request Chime (macOS).",
+    "developerName": "Bowen",
+    "category": "Productivity",
+    "capabilities": [
+      "Hooks",
+      "Local automation"
+    ],
+    "defaultPrompt": "Help me configure the Windows permission request chime."
+  }
+}
