@@ -1,5 +1,7 @@
 # Permission Request Chime
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 Permission Request Chime is a Codex plugin that plays a short local sound when
 Codex creates a permission request. It is useful when approval popups are easy
 to miss while you are working in another window.
@@ -103,6 +105,7 @@ The default command only attempts to play a local sound file or beep. Review
 ```text
 .
 ├── .agents/plugins/marketplace.json
+├── README.zh-CN.md
 ├── docs/
 │   ├── conversation-summary.md
 │   └── testing.md
