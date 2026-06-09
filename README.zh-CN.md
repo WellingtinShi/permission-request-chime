@@ -16,9 +16,10 @@ Permission Request Chime 是一个 Codex 插件 marketplace，现在包含两个
 | 系统 | 要安装的插件 | 提示音命令 |
 | --- | --- | --- |
 | macOS | `permission-request-chime` | `/bin/sh` + `afplay` |
-| Windows | `permission-request-chime-windows` | `powershell.exe` + Windows 系统声音 |
+| Windows | `permission-request-chime-windows` | `powershell.exe` + Windows `.wav` 文件 |
 
-`v0.1.0` 是 macOS-only。macOS / Windows 双版本请使用 `v0.2.0` 或更新版本。
+`v0.1.0` 是 macOS-only。`v0.2.0` 开始拆成 macOS / Windows 双版本。
+Windows 用户请使用 `v0.2.1` 或更新版本，里面的 `.wav` 播放 hook 更可靠。
 
 ## 安装
 
@@ -27,7 +28,7 @@ Permission Request Chime 是一个 Codex 插件 marketplace，现在包含两个
 推荐使用固定版本：
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
 ```
 
 如果你想跟随最新开发版本，可以省略 `--ref`：
@@ -62,7 +63,7 @@ macOS：
 ```text
 请帮我添加 Permission Request Chime marketplace，并运行：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
 
 运行完成后，请提醒我去 Codex plugin directory 安装 permission-request-chime。
 ```
@@ -72,7 +73,7 @@ Windows：
 ```text
 请帮我添加 Permission Request Chime marketplace，并运行：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
 
 运行完成后，请提醒我去 Codex plugin directory 安装 permission-request-chime-windows。
 ```
@@ -97,8 +98,9 @@ Windows 版：
 
 - 运行 `powershell.exe`。
 - 如果 `CODEX_PERMISSION_CHIME_SOUND` 指向可读 `.wav` 文件，会播放该文件。
-- 否则播放 Windows `SystemSounds.Asterisk` 系统声音。
-- 如果失败，会尝试 `[Console]::Beep(880,250)`。
+- 否则会尝试播放 `C:\Windows\Media` 里的常见 Windows `.wav` 文件。
+- 如果失败，会尝试 `SystemSounds.Exclamation`。
+- 最后 fallback 到 `[Console]::Beep(...)`。
 
 ## 自定义提示音
 

@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
-  <title id="title">Permission Request Chime v0.2.0 中文宣传图</title>
+  <title id="title">Permission Request Chime v0.2.1 中文宣传图</title>
   <desc id="desc">一张宣布 Codex 权限提示音插件支持 macOS 和 Windows 两个版本的社交媒体配图。</desc>
   <rect width="1600" height="900" fill="#fafaf8"/>
   <line x1="96" y1="118" x2="1504" y2="118" stroke="#d4d4d2" stroke-width="2"/>
-  <text x="96" y="84" fill="#737373" font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="28" letter-spacing="6">PERMISSION REQUEST CHIME · V0.2.0</text>
+  <text x="96" y="84" fill="#737373" font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="28" letter-spacing="6">PERMISSION REQUEST CHIME · V0.2.1</text>
   <text x="96" y="230" fill="#002fa7" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif" font-size="36" font-weight="700" letter-spacing="4">CODEX 插件</text>
   <text x="96" y="350" fill="#0a0a0a" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif" font-size="112" font-weight="300">macOS</text>
   <text x="500" y="350" fill="#0a0a0a" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="112" font-weight="200">+</text>

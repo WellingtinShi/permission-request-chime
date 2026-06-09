@@ -8,7 +8,7 @@
 
 - Codex 等你批准时，macOS 和 Windows 都能响一声了
 - Permission Request Chime 现在有 Windows 版了
-- 别让 Codex 在后台干等：提示音插件 v0.2.0
+- 别让 Codex 在后台干等：提示音插件 v0.2.1
 
 ## 图片顺序
 
@@ -52,12 +52,12 @@ macOS 版走 /bin/sh + afplay。
 默认播放 Glass.aiff。
 
 Windows 版走 PowerShell。
-默认播放 Windows SystemSounds.Asterisk。
+优先播放 C:\Windows\Media 里的真实 .wav 文件。
 也可以把 CODEX_PERMISSION_CHIME_SOUND 指到自己的 .wav 文件。
 
 安装 marketplace：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
 
 这条命令只是添加插件来源。
 
@@ -87,7 +87,7 @@ https://github.com/WellingtinShi/permission-request-chime/blob/main/README.zh-CN
 ```text
 安装命令：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
 
 命令只是添加 marketplace。
 之后去 Codex plugin directory 里按系统安装一个：
@@ -102,7 +102,7 @@ Windows：permission-request-chime-windows
 
 ```text
 Q：Windows 现在能直接用了吗？
-A：用 Windows 版：permission-request-chime-windows。它走 powershell.exe 播放 Windows 系统声音。
+A：用 Windows 版：permission-request-chime-windows。它走 powershell.exe，优先播放 Windows 自带 .wav 文件。
 
 Q：macOS 还用原来的插件名吗？
 A：对，macOS 还是 permission-request-chime。

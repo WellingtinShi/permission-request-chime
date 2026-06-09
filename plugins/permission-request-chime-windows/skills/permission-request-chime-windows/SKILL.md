@@ -17,8 +17,9 @@ creates an approval request.
 - On Windows it launches `powershell.exe`.
 - If `CODEX_PERMISSION_CHIME_SOUND` points to a readable `.wav` file, the hook
   plays that file with `System.Media.SoundPlayer`.
-- Otherwise it plays the Windows `SystemSounds.Asterisk` sound.
-- If that fails, it falls back to `[Console]::Beep(880,250)`.
+- Otherwise it tries common Windows `.wav` files from `C:\Windows\Media`.
+- If that fails, it plays `SystemSounds.Exclamation`.
+- If that fails, it falls back to `[Console]::Beep(...)`.
 
 ## Tune the sound
 

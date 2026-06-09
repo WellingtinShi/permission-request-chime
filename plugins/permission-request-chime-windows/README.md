@@ -14,16 +14,16 @@ the screen. The hook matches every permission request and launches a small
 `powershell.exe` command.
 
 The default command tries to play `CODEX_PERMISSION_CHIME_SOUND` when it points
-to a readable `.wav` file. If no custom sound is configured, it plays the
-Windows `SystemSounds.Asterisk` sound. If that fails, it falls back to
-`[Console]::Beep(880,250)`.
+to a readable `.wav` file. If no custom sound is configured, it tries common
+Windows `.wav` files from `C:\Windows\Media`, then falls back to
+`SystemSounds.Exclamation`, then to `[Console]::Beep(...)`.
 
 ## Install
 
 Add the marketplace:
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
 ```
 
 Then open the Codex plugin directory and install:

@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"$ErrorActionPreference='SilentlyContinue'; $sound=$env:CODEX_PERMISSION_CHIME_SOUND; if ($sound -and (Test-Path $sound)) { try { (New-Object System.Media.SoundPlayer $sound).PlaySync(); exit 0 } catch {} }; try { [System.Media.SystemSounds]::Asterisk.Play(); Start-Sleep -Milliseconds 700 } catch { [Console]::Beep(880,250) }\"",
+            "command": "powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"$ErrorActionPreference='SilentlyContinue'; $candidates=@(); if ($env:CODEX_PERMISSION_CHIME_SOUND) { $candidates += $env:CODEX_PERMISSION_CHIME_SOUND }; $media=Join-Path $env:WINDIR 'Media'; $candidates += (Join-Path $media 'Windows Notify System Generic.wav'); $candidates += (Join-Path $media 'Windows Notify.wav'); $candidates += (Join-Path $media 'Windows Ding.wav'); foreach ($sound in $candidates) { if ($sound -and (Test-Path $sound)) { try { $player=New-Object System.Media.SoundPlayer $sound; $player.Load(); $player.PlaySync(); exit 0 } catch {} } }; try { [System.Media.SystemSounds]::Exclamation.Play(); Start-Sleep -Milliseconds 900; exit 0 } catch {}; try { [Console]::Beep(1000,350); [Console]::Beep(800,250) } catch {}\"",
             "timeout": 3,
             "statusMessage": "Playing Windows permission request chime"
           }

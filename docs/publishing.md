@@ -16,15 +16,16 @@ WellingtinShi/permission-request-chime
 
 ## Release Flow
 
-`v0.1.0` was the original macOS-only release. Use `v0.2.0` or newer for the
-macOS / Windows split.
+`v0.1.0` was the original macOS-only release. `v0.2.0` introduced the macOS /
+Windows split. `v0.2.1` improves the Windows hook by using real `.wav` files
+before falling back to system sounds.
 
 To publish a new stable release:
 
 ```bash
 git push origin main
-git tag v0.2.0
-git push origin v0.2.0
+git tag v0.2.1
+git push origin v0.2.1
 ```
 
 If the tag already exists locally or remotely, inspect it before changing it.
@@ -35,7 +36,7 @@ Do not move published tags casually.
 After the public repository is updated, verify a fresh install:
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
 ```
 
 Then install the matching plugin from the Codex plugin directory:

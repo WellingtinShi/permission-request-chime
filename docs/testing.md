@@ -2,10 +2,10 @@
 
 ## 安装验证
 
-普通用户推荐固定到 `v0.2.0` 或更新版本：
+普通用户推荐固定到 `v0.2.1` 或更新版本：
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
 ```
 
 开发或跟随最新 `main` 分支时，可以省略 `--ref`：
@@ -84,4 +84,5 @@ plugins/permission-request-chime-windows/hooks/hooks.json
 ```
 
 默认命令会读取环境变量 `CODEX_PERMISSION_CHIME_SOUND`。如果没有设置，macOS 会使用
-`/System/Library/Sounds/Glass.aiff`，Windows 会使用 `SystemSounds.Asterisk`。
+`/System/Library/Sounds/Glass.aiff`，Windows 会优先使用 `CODEX_PERMISSION_CHIME_SOUND`
+或 `C:\Windows\Media` 里的常见 `.wav` 文件。

@@ -1108,7 +1108,7 @@
       <div class="content stack">
         <div class="chrome-min">
           <span>Permission Request Chime · 01</span>
-          <span>v0.2.0</span>
+          <span>v0.2.1</span>
         </div>
         <p class="t-cat">macOS / Windows</p>
         <h1 class="h-statement" style="margin-top:var(--sp-6)">现在<br>分成<br>两版</h1>
@@ -1154,7 +1154,7 @@
           </div>
           <div class="warning-row">
             <span class="tag">02 / win</span>
-            <div><strong>Windows 用 PowerShell</strong><span>播放 Windows 系统声音，也支持 .wav。</span></div>
+            <div><strong>Windows 用 PowerShell</strong><span>优先播放 Windows 自带 .wav 文件。</span></div>
           </div>
           <div class="warning-row">
             <span class="tag">03 / choose</span>
@@ -1162,7 +1162,7 @@
           </div>
         </div>
         <div class="deck-foot">
-          <span class="url">v0.1.0 是 macOS-only。v0.2.0 开始拆成两版。</span>
+          <span class="url">v0.2.1 改进 Windows 播放：先用真实 .wav 文件。</span>
           <span class="page">02/06</span>
         </div>
       </div>
@@ -1212,7 +1212,7 @@
           </div>
           <div class="flow-step">
             <span class="nb">02</span>
-            <div><strong>PowerShell 提示音</strong><span>默认播放 SystemSounds.Asterisk。</span></div>
+            <div><strong>PowerShell 提示音</strong><span>优先播放 C:\Windows\Media 里的 .wav。</span></div>
           </div>
           <div class="flow-step">
             <span class="nb">03</span>
@@ -1230,13 +1230,13 @@
       <div class="content stack">
         <div class="chrome-min">
           <span>Install · 05</span>
-          <span>v0.2.0</span>
+          <span>v0.2.1</span>
         </div>
         <p class="t-cat">Pinned Stable Install</p>
         <h2 class="h-xl" style="margin-top:var(--sp-6)">先加来源，<br>再选系统。</h2>
         <pre class="code-panel">codex plugin marketplace add \
 WellingtinShi/permission-request-chime \
---ref v0.2.0</pre>
+--ref v0.2.1</pre>
         <div class="install-note">
           <div class="cell"><strong>macOS</strong><span>安装 permission-request-chime。</span></div>
           <div class="cell"><strong>Windows</strong><span>安装 permission-request-chime-windows。</span></div>

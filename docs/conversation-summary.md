@@ -11,7 +11,7 @@
 
 ## 当前产品设计
 
-`v0.1.0` 是 macOS-only。后续维护改成 `v0.2.0` 双版本：
+`v0.1.0` 是 macOS-only。`v0.2.0` 改成双版本，`v0.2.1` 改进 Windows hook：
 
 - macOS：`permission-request-chime`
 - Windows：`permission-request-chime-windows`
@@ -28,7 +28,8 @@
 - macOS hook 使用 `/bin/sh`、`afplay`、`/System/Library/Sounds/Glass.aiff`，并 fallback 到
   `osascript -e "beep 1"` 和 terminal bell。
 - Windows hook 使用 `powershell.exe`，优先播放 `CODEX_PERMISSION_CHIME_SOUND` 指向的 `.wav`
-  文件，否则播放 `SystemSounds.Asterisk`，最后 fallback 到 `[Console]::Beep(880,250)`。
+  文件，否则尝试 `C:\Windows\Media` 中的常见 `.wav` 文件，再 fallback 到
+  `SystemSounds.Exclamation` 和 `[Console]::Beep(...)`。
 - 顶层 README、中文 README、插件内 README、testing/publishing 文档都已改为双版本说明。
 - X 宣传文案和配图已改为 macOS / Windows 双版本。
 - 小红书文案和 6 张 Guizang/Swiss 风格配图已改为 macOS / Windows 双版本。
@@ -46,7 +47,7 @@
 固定版本：
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.0
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
 ```
 
 安装插件：
