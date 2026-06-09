@@ -2,20 +2,33 @@
 
 ## 安装验证
 
-公开 marketplace 安装命令：
-
-```bash
-codex plugin marketplace add WellingtinShi/permission-request-chime
-```
-
-如果要固定稳定版本：
+普通用户推荐在终端运行固定版本安装命令：
 
 ```bash
 codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.1.0
 ```
 
-然后在 Codex plugin directory 中安装 `permission-request-chime`，重启 Codex，
-并在 hook review 中 trust 这个 `PermissionRequest` command hook。
+开发或跟随最新 `main` 分支时，可以省略 `--ref`：
+
+```bash
+codex plugin marketplace add WellingtinShi/permission-request-chime
+```
+
+不要两条都运行。第一条会固定在稳定 release tag，第二条会跟随默认分支。
+
+也可以把下面这段粘贴到本地 Codex 对话里，让 Codex 代为执行命令：
+
+```text
+Please install the Permission Request Chime plugin marketplace by running:
+
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.1.0
+```
+
+如果 Codex 弹出 permission request，需要批准后才会真正运行命令。
+
+marketplace 命令只负责添加插件来源。然后还需要在 Codex plugin directory 中安装
+`permission-request-chime`，重启 Codex，并在 hook review 中 trust 这个
+`PermissionRequest` command hook。
 
 ## 无害权限申请测试
 

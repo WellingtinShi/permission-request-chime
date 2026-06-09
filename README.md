@@ -9,19 +9,43 @@ your screen, inspect window titles, or use OCR.
 
 ## Install
 
-Add this repository as a Codex plugin marketplace:
+Choose one of these install methods.
 
-```bash
-codex plugin marketplace add WellingtinShi/permission-request-chime
-```
+### Option 1: Run In Terminal
 
-For a pinned stable install, use a release tag:
+For most users, run this pinned stable install command in Terminal:
 
 ```bash
 codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.1.0
 ```
 
-Then open the Codex plugin directory, choose the Permission Request Chime
+For development or latest changes, omit the `--ref` flag:
+
+```bash
+codex plugin marketplace add WellingtinShi/permission-request-chime
+```
+
+Do not run both commands. The first one pins the marketplace to a stable release
+tag. The second one tracks the repository's default branch.
+
+### Option 2: Ask Codex To Run It
+
+You can also paste this into a local Codex conversation and let Codex run the
+command for you:
+
+```text
+Please install the Permission Request Chime plugin marketplace by running:
+
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.1.0
+```
+
+Codex may ask for permission before running the command. Approve the request if
+you want Codex to add this plugin marketplace.
+
+### Finish Installation
+
+The marketplace command only adds this repository as a plugin source. After it
+finishes, open the Codex plugin directory, choose the Permission Request Chime
 marketplace, and install `permission-request-chime`.
 
 After installation, restart Codex. Because this plugin includes a command hook,
