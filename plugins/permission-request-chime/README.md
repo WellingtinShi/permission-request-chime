@@ -22,7 +22,7 @@ terminal bell.
 Add the marketplace:
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
 ```
 
 Then open the Codex plugin directory and install:

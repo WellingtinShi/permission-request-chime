@@ -2,10 +2,23 @@
 
 ## 安装验证
 
-普通用户推荐固定到 `v0.2.2` 或更新版本：
+普通用户推荐使用 `stable` 分支，之后可以不卸载插件直接刷新 marketplace：
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
+```
+
+后续升级：
+
+```text
+codex plugin marketplace upgrade permission-request-chime
+```
+
+如果你之前固定到了旧 tag，例如 `v0.2.1`，需要先切换一次 marketplace source：
+
+```text
+codex plugin marketplace remove permission-request-chime
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
 ```
 
 开发或跟随最新 `main` 分支时，可以省略 `--ref`：

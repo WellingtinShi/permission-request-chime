@@ -27,7 +27,13 @@ more reliable Windows `.wav` playback hook.
 
 ### 1. Add The Marketplace
 
-Run this pinned stable install command:
+Run this update-friendly stable install command:
+
+```text
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
+```
+
+For an immutable version pin, use the latest release tag:
 
 ```text
 codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
@@ -39,8 +45,9 @@ For development or latest changes, omit the `--ref` flag:
 codex plugin marketplace add WellingtinShi/permission-request-chime
 ```
 
-Do not run both commands. The first one pins the marketplace to a stable release
-tag. The second one tracks the repository's default branch.
+Do not run more than one marketplace command for the same source. `stable`
+tracks the latest tested release and can be refreshed with `marketplace upgrade`.
+The version tag is immutable and best when you want reproducible installs.
 
 ### 2. Install The Right Plugin
 
@@ -57,6 +64,33 @@ two hooks to run.
 
 Restart Codex after installation. Because these plugins include command hooks,
 Codex will ask you to review and trust the hook before it runs.
+
+## Upgrade Without Uninstalling
+
+If you installed the marketplace with `--ref stable`, refresh it with:
+
+```text
+codex plugin marketplace upgrade permission-request-chime
+```
+
+Then restart Codex. If Codex asks you to review and trust the updated hook, trust
+it before testing the chime.
+
+If you originally pinned an old release tag such as `v0.2.1`, switch the
+marketplace source once:
+
+```text
+codex plugin marketplace remove permission-request-chime
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
+```
+
+You do not need to uninstall the plugin first. If your local cache still shows
+the old plugin version after switching the marketplace source, quit Codex and
+run:
+
+```text
+codex plugin add permission-request-chime-windows@permission-request-chime
+```
 
 ## Ask Codex To Install
 

@@ -23,7 +23,7 @@ Windows `.wav` file from `C:\Windows\Media`, then falls back to
 Add the marketplace:
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
 ```
 
 Then open the Codex plugin directory and install:
@@ -34,6 +34,25 @@ permission-request-chime-windows
 
 Restart Codex after installation. Because the plugin bundles a command hook,
 Codex will ask you to review and trust the hook before it runs.
+
+## Upgrade
+
+If the marketplace was added with `--ref stable`, update it without uninstalling
+the plugin:
+
+```text
+codex plugin marketplace upgrade permission-request-chime
+```
+
+Restart Codex after the upgrade. Trust the updated hook when prompted.
+
+If you previously pinned an old release tag, remove and re-add the marketplace
+source once, then restart Codex:
+
+```text
+codex plugin marketplace remove permission-request-chime
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
+```
 
 ## Customize
 
