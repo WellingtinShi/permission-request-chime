@@ -2,143 +2,90 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-Permission Request Chime is a Codex plugin marketplace with two OS-specific
-plugins. Each plugin plays a short local sound when Codex creates a permission
-request, so approval prompts are harder to miss when you are working in another
-window.
+Permission Request Chime plays a short local sound when Codex creates a
+permission request, so Codex is less likely to sit quietly while you are working
+in another window.
 
-The plugins use Codex's `PermissionRequest` lifecycle hook. They do not watch
-your screen, inspect window titles, or use OCR.
+It uses Codex's `PermissionRequest` lifecycle hook. It does not watch your
+screen, inspect window titles, or use OCR.
 
-## Versions
+## Quick Install
 
-Install only the version that matches your OS:
-
-| OS | Plugin to install | Sound command |
-| --- | --- | --- |
-| macOS | `permission-request-chime` | `/bin/sh` + `afplay` |
-| Windows | `permission-request-chime-windows` | `powershell.exe` + Windows system sound |
-
-`v0.1.0` was macOS-only. `v0.2.0` introduced the macOS / Windows split.
-Use `v0.2.2` or newer for the manifest hook registration fix and the shorter,
-more reliable Windows `.wav` playback hook.
-
-## Install
-
-### 1. Add The Marketplace
-
-Run this update-friendly stable install command:
+Add the marketplace:
 
 ```text
 codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
 ```
 
-For an immutable version pin, use the latest release tag:
+Then open the Codex plugin directory and install one plugin:
 
-```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
-```
+| OS | Install this plugin |
+| --- | --- |
+| macOS | `permission-request-chime` |
+| Windows | `permission-request-chime-windows` |
 
-For development or latest changes, omit the `--ref` flag:
+Restart Codex after installation. Codex will ask you to review and trust the
+hook before it runs.
 
-```text
-codex plugin marketplace add WellingtinShi/permission-request-chime
-```
-
-Do not run more than one marketplace command for the same source. `stable`
-tracks the latest tested release and can be refreshed with `marketplace upgrade`.
-The version tag is immutable and best when you want reproducible installs.
-
-### 2. Install The Right Plugin
-
-The marketplace command only adds this repository as a plugin source. After it
-finishes, open the Codex plugin directory and install one plugin:
-
-- macOS: install `permission-request-chime`.
-- Windows: install `permission-request-chime-windows`.
-
-Do not install both versions on the same machine unless you intentionally want
+Do not install both plugins on the same machine unless you intentionally want
 two hooks to run.
 
-### 3. Restart And Trust
+## Ask Codex To Install
 
-Restart Codex after installation. Because these plugins include command hooks,
-Codex will ask you to review and trust the hook before it runs.
+You can also paste this into a local Codex conversation:
 
-## Upgrade Without Uninstalling
+```text
+Please add the Permission Request Chime marketplace by running:
 
-If you installed the marketplace with `--ref stable`, refresh it with:
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
+
+Then remind me to open the Codex plugin directory and install the plugin for my OS:
+macOS: permission-request-chime
+Windows: permission-request-chime-windows
+```
+
+## Upgrade
+
+If you installed with `--ref stable`, update the marketplace without
+uninstalling the plugin:
 
 ```text
 codex plugin marketplace upgrade permission-request-chime
 ```
 
-Then restart Codex. If Codex asks you to review and trust the updated hook, trust
-it before testing the chime.
+Restart Codex after upgrading. If Codex asks you to review and trust the updated
+hook, trust it before testing the chime.
 
-If you originally pinned an old release tag such as `v0.2.1`, switch the
-marketplace source once:
+If you previously pinned an old tag such as `v0.2.1`, switch to `stable` once:
 
 ```text
 codex plugin marketplace remove permission-request-chime
 codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
 ```
 
-You do not need to uninstall the plugin first. If your local cache still shows
-the old plugin version after switching the marketplace source, quit Codex and
-run:
+For a reproducible install instead of automatic stable upgrades, pin the latest
+release tag:
 
 ```text
-codex plugin add permission-request-chime-windows@permission-request-chime
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 ```
 
-## Ask Codex To Install
+## What It Does
 
-You can paste one of these prompts into a local Codex conversation.
+Both plugins match all Codex `PermissionRequest` events with `matcher: "*"`.
 
 macOS:
 
-```text
-Please add the Permission Request Chime marketplace by running:
-
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
-
-Then remind me to install permission-request-chime from the Codex plugin directory.
-```
+- Plays `/System/Library/Sounds/Glass.aiff` with `afplay`.
+- Falls back to `osascript -e "beep 1"`.
+- Falls back to a terminal bell.
 
 Windows:
 
-```text
-Please add the Permission Request Chime marketplace by running:
-
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
-
-Then remind me to install permission-request-chime-windows from the Codex plugin directory.
-```
-
-Codex may ask for permission before running the command. Approve the request if
-you want Codex to add this plugin marketplace.
-
-## What The Plugins Do
-
-Both plugins:
-
-- Match all Codex `PermissionRequest` events with `matcher: "*"`.
-- Play a local sound as soon as Codex creates an approval request.
-- Require hook review/trust before first run.
-
-macOS version:
-
-- Plays `/System/Library/Sounds/Glass.aiff` with `afplay`.
-- Falls back to `osascript -e "beep 1"`.
-- Falls back to a terminal bell if neither player is available.
-
-Windows version:
-
-- Runs `powershell.exe`.
-- Plays `CODEX_PERMISSION_CHIME_SOUND` when it points to a readable `.wav` file.
-- Otherwise plays one short Windows `.wav` file from `C:\Windows\Media`.
-- Falls back to `SystemSounds.Exclamation`, then a short `[Console]::Beep(...)`.
+- Runs an encoded `powershell.exe` command to avoid quoting issues.
+- Plays `CODEX_PERMISSION_CHIME_SOUND` if it points to a readable `.wav` file.
+- Otherwise plays a short `.wav` file from `C:\Windows\Media`.
+- Falls back to `SystemSounds.Exclamation`, then `[Console]::Beep(...)`.
 
 ## Customize The Sound
 
@@ -148,27 +95,18 @@ macOS:
 export CODEX_PERMISSION_CHIME_SOUND=/System/Library/Sounds/Ping.aiff
 ```
 
-Useful macOS built-in options include:
-
-- `/System/Library/Sounds/Glass.aiff`
-- `/System/Library/Sounds/Ping.aiff`
-- `/System/Library/Sounds/Pop.aiff`
-- `/System/Library/Sounds/Submarine.aiff`
-
 Windows:
 
 ```powershell
 $env:CODEX_PERMISSION_CHIME_SOUND = "C:\Windows\Media\Windows Notify System Generic.wav"
 ```
 
-On Windows, custom sounds should be `.wav` files readable by PowerShell.
-
-Changing the hook command itself requires restarting Codex and trusting the
-updated hook.
+After changing the hook command itself, restart Codex and trust the updated
+hook again.
 
 ## Test
 
-Use a harmless escalated command to trigger a permission request.
+Use a harmless permission request.
 
 macOS:
 
@@ -185,44 +123,31 @@ powershell.exe -NoProfile -Command Get-Date
 Expected behavior:
 
 1. Codex creates a permission request.
-2. The installed plugin's hook plays the chime.
-3. After approval, the harmless command prints the current date and time.
-
-See `docs/testing.md` for troubleshooting notes.
+2. The installed plugin plays the chime.
+3. After approval, the command prints the current date and time.
 
 ## Security
 
-These plugins bundle non-managed command hooks. Codex records trust against the
-exact hook definition, so changed hooks must be reviewed and trusted again.
-
-The default commands only attempt to play a local sound file, run a system
-sound/beep, or emit a terminal bell. Review the hook before trusting it:
+These plugins bundle non-managed command hooks, so Codex requires explicit
+trust before they run. Review the hook before trusting it:
 
 - macOS: `plugins/permission-request-chime/hooks/hooks.json`
 - Windows: `plugins/permission-request-chime-windows/hooks/hooks.json`
 
-## Repository Layout
+The readable Windows PowerShell source is also kept at
+`plugins/permission-request-chime-windows/scripts/play-chime.ps1`.
 
-```text
-.
-├── .agents/plugins/marketplace.json
-├── README.zh-CN.md
-├── docs/
-│   ├── publishing.md
-│   └── testing.md
-└── plugins/
-    ├── permission-request-chime/
-    │   ├── .codex-plugin/plugin.json
-    │   ├── README.md
-    │   ├── hooks/hooks.json
-    │   └── skills/permission-request-chime/SKILL.md
-    └── permission-request-chime-windows/
-        ├── .codex-plugin/plugin.json
-        ├── README.md
-        ├── hooks/hooks.json
-        ├── scripts/play-chime.ps1
-        └── skills/permission-request-chime-windows/SKILL.md
-```
+## Troubleshooting
+
+If there is no sound, check:
+
+- The plugin for your OS is installed and enabled.
+- Codex has been restarted after installation or upgrade.
+- The hook has been reviewed and trusted.
+- Your system is not muted and the output device works.
+- Windows focus assist or audio mixer settings are not blocking the sound.
+
+See `docs/testing.md` for more checks.
 
 ## License
 
