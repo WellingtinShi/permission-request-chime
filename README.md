@@ -20,7 +20,8 @@ Install only the version that matches your OS:
 | Windows | `permission-request-chime-windows` | `powershell.exe` + Windows system sound |
 
 `v0.1.0` was macOS-only. `v0.2.0` introduced the macOS / Windows split.
-Use `v0.2.1` or newer for the more reliable Windows `.wav` playback hook.
+Use `v0.2.2` or newer for the manifest hook registration fix and the shorter,
+more reliable Windows `.wav` playback hook.
 
 ## Install
 
@@ -29,7 +30,7 @@ Use `v0.2.1` or newer for the more reliable Windows `.wav` playback hook.
 Run this pinned stable install command:
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 ```
 
 For development or latest changes, omit the `--ref` flag:
@@ -66,7 +67,7 @@ macOS:
 ```text
 Please add the Permission Request Chime marketplace by running:
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 
 Then remind me to install permission-request-chime from the Codex plugin directory.
 ```
@@ -76,7 +77,7 @@ Windows:
 ```text
 Please add the Permission Request Chime marketplace by running:
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 
 Then remind me to install permission-request-chime-windows from the Codex plugin directory.
 ```
@@ -102,9 +103,8 @@ Windows version:
 
 - Runs `powershell.exe`.
 - Plays `CODEX_PERMISSION_CHIME_SOUND` when it points to a readable `.wav` file.
-- Otherwise tries common Windows `.wav` files from `C:\Windows\Media`.
-- Falls back to `SystemSounds.Exclamation`.
-- Falls back to `[Console]::Beep(...)`.
+- Otherwise plays one short Windows `.wav` file from `C:\Windows\Media`.
+- Falls back to `SystemSounds.Exclamation`, then a short `[Console]::Beep(...)`.
 
 ## Customize The Sound
 
@@ -186,6 +186,7 @@ sound/beep, or emit a terminal bell. Review the hook before trusting it:
         ├── .codex-plugin/plugin.json
         ├── README.md
         ├── hooks/hooks.json
+        ├── scripts/play-chime.ps1
         └── skills/permission-request-chime-windows/SKILL.md
 ```
 

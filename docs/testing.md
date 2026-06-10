@@ -2,10 +2,10 @@
 
 ## 安装验证
 
-普通用户推荐固定到 `v0.2.1` 或更新版本：
+普通用户推荐固定到 `v0.2.2` 或更新版本：
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 ```
 
 开发或跟随最新 `main` 分支时，可以省略 `--ref`：

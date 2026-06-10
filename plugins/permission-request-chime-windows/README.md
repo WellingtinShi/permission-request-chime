@@ -11,19 +11,19 @@ macOS users should install `permission-request-chime` instead.
 
 The plugin uses Codex's `PermissionRequest` lifecycle hook instead of watching
 the screen. The hook matches every permission request and launches a small
-`powershell.exe` command.
+encoded `powershell.exe` command, which avoids nested quoting issues on Windows.
 
 The default command tries to play `CODEX_PERMISSION_CHIME_SOUND` when it points
-to a readable `.wav` file. If no custom sound is configured, it tries common
-Windows `.wav` files from `C:\Windows\Media`, then falls back to
-`SystemSounds.Exclamation`, then to `[Console]::Beep(...)`.
+to a readable `.wav` file. If no custom sound is configured, it plays one short
+Windows `.wav` file from `C:\Windows\Media`, then falls back to
+`SystemSounds.Exclamation`, then to a short `[Console]::Beep(...)`.
 
 ## Install
 
 Add the marketplace:
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 ```
 
 Then open the Codex plugin directory and install:
@@ -49,7 +49,8 @@ On Windows, custom sounds should be `.wav` files readable by PowerShell.
 
 The default hook command only attempts to play a local `.wav` file, a Windows
 system sound, or a beep. Codex requires explicit trust before non-managed
-command hooks can run.
+command hooks can run. The readable PowerShell source is kept in
+`scripts/play-chime.ps1`.
 
 Review `hooks/hooks.json` before trusting it.
 

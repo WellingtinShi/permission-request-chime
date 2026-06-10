@@ -1,11 +1,12 @@
 {
   "name": "permission-request-chime-windows",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Play a local Windows sound whenever Codex creates a permission request.",
   "author": {
     "name": "Bowen"
   },
   "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
   "interface": {
     "displayName": "Permission Request Chime (Windows)",
     "shortDescription": "Play a Windows chime when Codex asks for permission.",

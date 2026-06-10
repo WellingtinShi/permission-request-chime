@@ -8,7 +8,7 @@
 
 - Codex 等你批准时，macOS 和 Windows 都能响一声了
 - Permission Request Chime 现在有 Windows 版了
-- 别让 Codex 在后台干等：提示音插件 v0.2.1
+- 别让 Codex 在后台干等：提示音插件 v0.2.2
 
 ## 图片顺序
 
@@ -57,7 +57,7 @@ Windows 版走 PowerShell。
 
 安装 marketplace：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 
 这条命令只是添加插件来源。
 
@@ -87,7 +87,7 @@ https://github.com/WellingtinShi/permission-request-chime/blob/main/README.zh-CN
 ```text
 安装命令：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 
 命令只是添加 marketplace。
 之后去 Codex plugin directory 里按系统安装一个：

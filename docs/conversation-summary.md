@@ -11,7 +11,7 @@
 
 ## 当前产品设计
 
-`v0.1.0` 是 macOS-only。`v0.2.0` 改成双版本，`v0.2.1` 改进 Windows hook：
+`v0.1.0` 是 macOS-only。`v0.2.0` 改成双版本，`v0.2.2` 改进 Windows hook：
 
 - macOS：`permission-request-chime`
 - Windows：`permission-request-chime-windows`
@@ -47,7 +47,7 @@
 固定版本：
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 ```
 
 安装插件：

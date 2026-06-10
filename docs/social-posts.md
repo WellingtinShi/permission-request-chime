@@ -22,7 +22,7 @@ Reply with:
 ```text
 Install marketplace:
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 
 Then open the Codex plugin directory and install the version for your OS:
 
@@ -37,7 +37,7 @@ Shorter version:
 ```text
 Codex permission requests are easy to miss when you're in another window.
 
-Permission Request Chime v0.2.1 has two versions:
+Permission Request Chime v0.2.2 has two versions:
 
 macOS + Windows
 
@@ -70,7 +70,7 @@ Reply with:
 ```text
 安装 marketplace：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 
 然后去 Codex plugin directory 按系统安装一个：
 

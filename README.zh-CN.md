@@ -19,7 +19,7 @@ Permission Request Chime 是一个 Codex 插件 marketplace，现在包含两个
 | Windows | `permission-request-chime-windows` | `powershell.exe` + Windows `.wav` 文件 |
 
 `v0.1.0` 是 macOS-only。`v0.2.0` 开始拆成 macOS / Windows 双版本。
-Windows 用户请使用 `v0.2.1` 或更新版本，里面的 `.wav` 播放 hook 更可靠。
+Windows 用户请使用 `v0.2.2` 或更新版本，里面的 `.wav` 播放 hook 更可靠。
 
 ## 安装
 
@@ -28,7 +28,7 @@ Windows 用户请使用 `v0.2.1` 或更新版本，里面的 `.wav` 播放 hook 
 推荐使用固定版本：
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 ```
 
 如果你想跟随最新开发版本，可以省略 `--ref`：
@@ -63,7 +63,7 @@ macOS：
 ```text
 请帮我添加 Permission Request Chime marketplace，并运行：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 
 运行完成后，请提醒我去 Codex plugin directory 安装 permission-request-chime。
 ```
@@ -73,7 +73,7 @@ Windows：
 ```text
 请帮我添加 Permission Request Chime marketplace，并运行：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.1
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 
 运行完成后，请提醒我去 Codex plugin directory 安装 permission-request-chime-windows。
 ```
