@@ -1,6 +1,6 @@
 {
   "name": "permission-request-chime",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Play a local macOS sound whenever Codex creates a permission request.",
   "author": {
     "name": "Bowen"
@@ -10,7 +10,7 @@
   "interface": {
     "displayName": "Permission Request Chime (macOS)",
     "shortDescription": "Play a macOS chime when Codex asks for permission.",
-    "longDescription": "Permission Request Chime (macOS) bundles a Codex PermissionRequest lifecycle hook that plays a local macOS sound as soon as an approval request is created. Install this version on macOS. Windows users should install Permission Request Chime (Windows).",
+    "longDescription": "Permission Request Chime (macOS) bundles a Codex PermissionRequest lifecycle hook that plays a local macOS sound as soon as an approval request is created. It also includes an optional macOS Browser site prompt watcher for Codex in-app Browser website access dialogs. Install this version on macOS. Windows users should install Permission Request Chime (Windows).",
     "developerName": "Bowen",
     "category": "Productivity",
     "capabilities": [

@@ -18,6 +18,23 @@ creates an approval request.
 - If `afplay` is unavailable, it falls back to `osascript -e "beep 1"`.
 - If neither is available, it tries a terminal bell.
 
+## Browser site prompts
+
+Codex in-app Browser prompts such as `Allow Codex to access https://example.com?`
+are app UI prompts, not `PermissionRequest` lifecycle events. The hook does not
+fire for them.
+
+On macOS, the plugin includes an optional Accessibility-based watcher:
+
+```bash
+scripts/install-browser-site-watcher.sh
+```
+
+It watches Codex windows for `Allow Codex to access ...` text and plays the same
+local sound once per visible prompt. If it does not work, the user likely needs
+to grant Accessibility access in System Settings > Privacy & Security >
+Accessibility.
+
 ## Tune the sound
 
 Set `CODEX_PERMISSION_CHIME_SOUND` before starting Codex, or edit
