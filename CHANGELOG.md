@@ -1,13 +1,5 @@
 # Changelog
 
-## 0.2.3 - 2026-06-21
-
-- Adds an optional macOS Browser site prompt watcher for Codex in-app Browser
-  dialogs such as `Allow Codex to access https://example.com?`.
-- Documents why Browser site access prompts are separate from Codex
-  `PermissionRequest` lifecycle hooks.
-- Adds install and uninstall scripts for the optional macOS watcher.
-
 ## 0.2.2 - 2026-06-09
 
 - Adds explicit `hooks` entries to both plugin manifests so Codex reliably

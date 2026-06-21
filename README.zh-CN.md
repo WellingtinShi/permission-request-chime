@@ -61,7 +61,7 @@ codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
 如果你需要完全固定的可复现安装，可以使用最新 release tag：
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.3
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 ```
 
 ## 它会做什么
@@ -73,7 +73,6 @@ macOS：
 - 默认用 `afplay` 播放 `/System/Library/Sounds/Glass.aiff`。
 - 如果 `afplay` 不可用，会尝试 `osascript -e "beep 1"`。
 - 如果还是不可用，会尝试 terminal bell。
-- 另外包含一个可选的 Browser 网站访问弹窗 watcher。
 
 Windows：
 
@@ -97,34 +96,6 @@ $env:CODEX_PERMISSION_CHIME_SOUND = "C:\Windows\Media\Windows Notify System Gene
 ```
 
 如果你直接修改 hook 命令，需要重启 Codex，并重新 trust 更新后的 hook。
-
-## Browser 网站访问弹窗
-
-Codex in-app Browser 有一种单独的网站访问授权弹窗：
-
-```text
-Allow Codex to access https://example.com?
-```
-
-这个弹窗属于 Codex app 的 Browser site allowlist 流程，不是
-`PermissionRequest` lifecycle event，所以普通 hook 监听不到它。
-
-macOS 可以启用一个可选的 Accessibility watcher：
-
-```bash
-plugins/permission-request-chime/scripts/install-browser-site-watcher.sh
-```
-
-它会监听 Codex 窗口里的 `Allow Codex to access ...` 文本，并在每个弹窗出现时播放一次同样的本地提示音。
-
-卸载：
-
-```bash
-plugins/permission-request-chime/scripts/uninstall-browser-site-watcher.sh
-```
-
-如果 watcher 没响，需要在 System Settings > Privacy & Security >
-Accessibility 里给它权限，然后重新运行 installer，或者退出登录后再登录。
 
 ## 测试
 
@@ -166,8 +137,6 @@ Windows hook 的可读 PowerShell 版本也保存在：
 - 是否安装并启用了对应系统的插件。
 - 安装或升级后是否已经重启 Codex。
 - hook 是否已经 review / trust。
-- 如果是 macOS Browser 网站访问弹窗，是否安装了可选 watcher，并授予了
-  Accessibility 权限。
 - 系统是否静音，输出设备是否正常。
 - Windows focus assist 或音量混音器是否拦截了声音。
 

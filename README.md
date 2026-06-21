@@ -67,7 +67,7 @@ For a reproducible install instead of automatic stable upgrades, pin the latest
 release tag:
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.3
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
 ```
 
 ## What It Does
@@ -79,7 +79,6 @@ macOS:
 - Plays `/System/Library/Sounds/Glass.aiff` with `afplay`.
 - Falls back to `osascript -e "beep 1"`.
 - Falls back to a terminal bell.
-- Includes an optional Browser site prompt watcher for in-app Browser dialogs.
 
 Windows:
 
@@ -104,36 +103,6 @@ $env:CODEX_PERMISSION_CHIME_SOUND = "C:\Windows\Media\Windows Notify System Gene
 
 After changing the hook command itself, restart Codex and trust the updated
 hook again.
-
-## Browser Site Access Prompts
-
-The Codex in-app Browser can show a separate site access prompt:
-
-```text
-Allow Codex to access https://example.com?
-```
-
-That prompt is part of the Codex app's Browser site allowlist flow. It is not a
-`PermissionRequest` lifecycle event, so the normal plugin hook cannot see it.
-
-On macOS, you can enable the optional Accessibility-based watcher:
-
-```bash
-plugins/permission-request-chime/scripts/install-browser-site-watcher.sh
-```
-
-It watches Codex windows for `Allow Codex to access ...` and plays the same
-local chime once per visible prompt.
-
-Uninstall it:
-
-```bash
-plugins/permission-request-chime/scripts/uninstall-browser-site-watcher.sh
-```
-
-If the watcher does not chime, grant Accessibility access in System Settings >
-Privacy & Security > Accessibility, then run the installer again or log out and
-back in.
 
 ## Test
 
@@ -175,8 +144,6 @@ If there is no sound, check:
 - The plugin for your OS is installed and enabled.
 - Codex has been restarted after installation or upgrade.
 - The hook has been reviewed and trusted.
-- For Browser site access prompts on macOS, the optional watcher is installed
-  and has Accessibility access.
 - Your system is not muted and the output device works.
 - Windows focus assist or audio mixer settings are not blocking the sound.
 

@@ -17,37 +17,6 @@ The default command plays `/System/Library/Sounds/Glass.aiff` with `afplay`.
 If `afplay` is unavailable, it falls back to `osascript -e "beep 1"`, then to a
 terminal bell.
 
-## Browser Site Prompts
-
-Codex in-app Browser site access prompts, such as:
-
-```text
-Allow Codex to access https://example.com?
-```
-
-are Codex app UI prompts, not `PermissionRequest` lifecycle events. The normal
-hook cannot see them.
-
-For those prompts, this plugin includes an optional macOS watcher that reads
-the Codex window through macOS Accessibility and plays the same local chime
-when it sees an `Allow Codex to access ...` dialog.
-
-Install the optional watcher:
-
-```bash
-scripts/install-browser-site-watcher.sh
-```
-
-Uninstall it:
-
-```bash
-scripts/uninstall-browser-site-watcher.sh
-```
-
-If the watcher does not chime, grant Accessibility access in System Settings >
-Privacy & Security > Accessibility, then run the installer again or log out and
-back in.
-
 ## Install
 
 Add the marketplace:
@@ -93,6 +62,5 @@ Review `hooks/hooks.json` before trusting it.
 - macOS only.
 - Requires local Codex sessions that load lifecycle hooks.
 - Depends on hooks being enabled in Codex configuration.
-- Browser site access prompts require the optional Accessibility-based watcher.
 - System mute, focus mode, or an unavailable audio device can still prevent
   audible playback.
