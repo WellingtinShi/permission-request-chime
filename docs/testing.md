@@ -35,6 +35,7 @@ marketplace 命令只负责添加插件来源。然后在 Codex plugin directory
 - Windows：`permission-request-chime-windows`
 
 安装后重启 Codex，并在 hook review 中 trust 对应的 `PermissionRequest` command hook。
+测试前把权限模式设为“请求批准”，不要使用“自动审批”。
 
 ## 无害权限申请测试
 
@@ -58,6 +59,10 @@ powershell.exe -NoProfile -Command Get-Date
 2. 已安装插件的 `PermissionRequest` hook 被触发。
 3. 系统播放提示音。
 4. 用户批准后，命令输出当前时间。
+
+切换到“自动审批”后再次触发同类请求，预期不会播放提示音。新版 Codex
+仍会触发 `PermissionRequest` hook，但 `v0.2.4` 会识别
+`approvals_reviewer = "auto_review"` 并静音。
 
 ## 如果没有声音
 

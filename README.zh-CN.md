@@ -2,11 +2,13 @@
 
 [English](README.md) | 简体中文
 
-Permission Request Chime 是一个 Codex 插件。Codex 创建 permission request
-审批请求时，它会播放一声本地提示音，避免 Codex 在后台安静等待，你却没有发现。
+Permission Request Chime 是一个 Codex 插件。Codex 把 permission request
+交给你审批时，它会播放一声本地提示音，避免 Codex 在后台安静等待，你却没有发现。
+由自动审批处理的请求会保持安静。
 
-它使用 Codex 的 `PermissionRequest` lifecycle hook。它不会截图，不会识别窗口标题，
-也不会用 OCR 读取屏幕。
+它使用 Codex 的 `PermissionRequest` lifecycle hook，并读取当前 turn 的本地
+`approvals_reviewer` 元数据，用来区分用户审批和自动审批。它不会截图，不会识别窗口标题，
+不会用 OCR 读取屏幕，也不会发起网络请求。
 
 ## 快速安装
 
@@ -61,22 +63,26 @@ codex plugin marketplace add WellingtinShi/permission-request-chime --ref stable
 如果你需要完全固定的可复现安装，可以使用最新 release tag：
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.4
 ```
 
 ## 它会做什么
 
-两个插件都会匹配所有 Codex `PermissionRequest` 事件，配置为 `matcher: "*"`。
+两个插件都会匹配 Codex `PermissionRequest` 事件，配置为 `matcher: "*"`。新版 Codex
+会先触发这个 hook，再决定交给自动审批还是用户审批，因此脚本会先检查当前 turn
+的审批来源。`auto_review` 会静音；交给用户的请求才会播放。旧版 Codex
+如果没有审批来源元数据，会保留原来的响铃行为。
 
 macOS：
 
+- 运行 `scripts/play-chime.sh`。
 - 默认用 `afplay` 播放 `/System/Library/Sounds/Glass.aiff`。
 - 如果 `afplay` 不可用，会尝试 `osascript -e "beep 1"`。
 - 如果还是不可用，会尝试 terminal bell。
 
 Windows：
 
-- 使用 encoded `powershell.exe` 命令，避免 Windows 引号解析问题。
+- 运行 `scripts/play-chime.ps1` 的 encoded 副本，避免 Windows 引号解析问题。
 - 如果 `CODEX_PERMISSION_CHIME_SOUND` 指向可读 `.wav` 文件，会播放该文件。
 - 否则播放 `C:\Windows\Media` 里的短 `.wav` 文件。
 - 最后 fallback 到 `SystemSounds.Exclamation` 和 `[Console]::Beep(...)`。
@@ -99,7 +105,7 @@ $env:CODEX_PERMISSION_CHIME_SOUND = "C:\Windows\Media\Windows Notify System Gene
 
 ## 测试
 
-触发一个无害的权限申请。
+先把 Codex 设为“请求批准”，再触发一个无害的权限申请。
 
 macOS：
 
@@ -115,9 +121,11 @@ powershell.exe -NoProfile -Command Get-Date
 
 预期行为：
 
-1. Codex 创建 permission request。
+1. Codex 把 permission request 交给你审批。
 2. 已安装插件播放提示音。
 3. 批准后，命令输出当前日期和时间。
+
+切换到“自动审批”后，同类请求应该保持安静。
 
 ## 安全说明
 
@@ -127,8 +135,10 @@ trust 前可以先查看 hook：
 - macOS：`plugins/permission-request-chime/hooks/hooks.json`
 - Windows：`plugins/permission-request-chime-windows/hooks/hooks.json`
 
-Windows hook 的可读 PowerShell 版本也保存在：
-`plugins/permission-request-chime-windows/scripts/play-chime.ps1`
+两个 hook 的可读播放脚本分别保存在：
+
+- macOS：`plugins/permission-request-chime/scripts/play-chime.sh`
+- Windows：`plugins/permission-request-chime-windows/scripts/play-chime.ps1`
 
 ## 没有声音怎么办
 

@@ -2,12 +2,15 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-Permission Request Chime plays a short local sound when Codex creates a
-permission request, so Codex is less likely to sit quietly while you are working
-in another window.
+Permission Request Chime plays a short local sound when Codex routes a
+permission request to you for approval, so Codex is less likely to sit quietly
+while you are working in another window. Requests handled by automatic review
+stay silent.
 
-It uses Codex's `PermissionRequest` lifecycle hook. It does not watch your
-screen, inspect window titles, or use OCR.
+It uses Codex's `PermissionRequest` lifecycle hook and reads the current turn's
+local `approvals_reviewer` metadata to distinguish user review from automatic
+review. It does not watch your screen, inspect window titles, use OCR, or make
+network requests.
 
 ## Quick Install
 
@@ -67,22 +70,28 @@ For a reproducible install instead of automatic stable upgrades, pin the latest
 release tag:
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.4
 ```
 
 ## What It Does
 
-Both plugins match all Codex `PermissionRequest` events with `matcher: "*"`.
+Both plugins match Codex `PermissionRequest` events with `matcher: "*"`. Newer
+Codex versions fire this hook before choosing automatic review or user review,
+so the chime script checks the current turn metadata first. It exits silently
+for `auto_review` and plays for requests routed to the user. If an older Codex
+version does not provide reviewer metadata, the plugin keeps the original
+chime behavior.
 
 macOS:
 
+- Runs `scripts/play-chime.sh`.
 - Plays `/System/Library/Sounds/Glass.aiff` with `afplay`.
 - Falls back to `osascript -e "beep 1"`.
 - Falls back to a terminal bell.
 
 Windows:
 
-- Runs an encoded `powershell.exe` command to avoid quoting issues.
+- Runs an encoded copy of `scripts/play-chime.ps1` to avoid quoting issues.
 - Plays `CODEX_PERMISSION_CHIME_SOUND` if it points to a readable `.wav` file.
 - Otherwise plays a short `.wav` file from `C:\Windows\Media`.
 - Falls back to `SystemSounds.Exclamation`, then `[Console]::Beep(...)`.
@@ -106,7 +115,7 @@ hook again.
 
 ## Test
 
-Use a harmless permission request.
+Set Codex to ask you for approval, then use a harmless permission request.
 
 macOS:
 
@@ -122,9 +131,11 @@ powershell.exe -NoProfile -Command Get-Date
 
 Expected behavior:
 
-1. Codex creates a permission request.
+1. Codex routes a permission request to you.
 2. The installed plugin plays the chime.
 3. After approval, the command prints the current date and time.
+
+In automatic approval mode, the same request should stay silent.
 
 ## Security
 
@@ -134,8 +145,10 @@ trust before they run. Review the hook before trusting it:
 - macOS: `plugins/permission-request-chime/hooks/hooks.json`
 - Windows: `plugins/permission-request-chime-windows/hooks/hooks.json`
 
-The readable Windows PowerShell source is also kept at
-`plugins/permission-request-chime-windows/scripts/play-chime.ps1`.
+The readable playback sources are:
+
+- macOS: `plugins/permission-request-chime/scripts/play-chime.sh`
+- Windows: `plugins/permission-request-chime-windows/scripts/play-chime.ps1`
 
 ## Troubleshooting
 

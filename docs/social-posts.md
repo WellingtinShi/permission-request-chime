@@ -8,7 +8,8 @@ I rebuilt Permission Request Chime as two Codex plugins:
 macOS: permission-request-chime
 Windows: permission-request-chime-windows
 
-Same idea: when Codex asks for permission, play a local sound.
+Same idea: when Codex asks you for permission, play a local sound.
+Automatic reviews stay quiet.
 
 No screen watching.
 No OCR.
@@ -22,7 +23,7 @@ Reply with:
 ```text
 Install marketplace:
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.4
 
 Then open the Codex plugin directory and install the version for your OS:
 
@@ -37,7 +38,7 @@ Shorter version:
 ```text
 Codex permission requests are easy to miss when you're in another window.
 
-Permission Request Chime v0.2.2 has two versions:
+Permission Request Chime v0.2.4 has two versions:
 
 macOS + Windows
 
@@ -60,6 +61,7 @@ Codex 请求权限、停下来等你批准时，本地响一声。
 不识别窗口。
 不跑 OCR。
 用的是 Codex 自己的 PermissionRequest hook。
+自动审批时保持安静。
 
 中文说明：
 https://github.com/WellingtinShi/permission-request-chime/blob/main/README.zh-CN.md
@@ -70,7 +72,7 @@ Reply with:
 ```text
 安装 marketplace：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.4
 
 然后去 Codex plugin directory 按系统安装一个：
 

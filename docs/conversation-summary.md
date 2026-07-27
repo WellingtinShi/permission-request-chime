@@ -11,7 +11,8 @@
 
 ## 当前产品设计
 
-`v0.1.0` 是 macOS-only。`v0.2.0` 改成双版本，`v0.2.2` 改进 Windows hook：
+`v0.1.0` 是 macOS-only。`v0.2.0` 改成双版本，`v0.2.2` 改进 Windows hook，
+`v0.2.4` 修复自动审批也会误响的问题：
 
 - macOS：`permission-request-chime`
 - Windows：`permission-request-chime-windows`
@@ -25,6 +26,8 @@
 - macOS 插件位于 `plugins/permission-request-chime/`。
 - Windows 插件位于 `plugins/permission-request-chime-windows/`。
 - 两个插件都使用 `PermissionRequest` 事件和 `matcher: "*"`。
+- 两个插件都会读取当前 turn 的 `approvals_reviewer` 元数据；自动审批静音，
+  交给用户的审批请求才播放。
 - macOS hook 使用 `/bin/sh`、`afplay`、`/System/Library/Sounds/Glass.aiff`，并 fallback 到
   `osascript -e "beep 1"` 和 terminal bell。
 - Windows hook 使用 `powershell.exe`，优先播放 `CODEX_PERMISSION_CHIME_SOUND` 指向的 `.wav`
@@ -47,7 +50,7 @@
 固定版本：
 
 ```text
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.4
 ```
 
 安装插件：

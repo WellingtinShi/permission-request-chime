@@ -6,14 +6,16 @@ description: Explain and tune the macOS Permission Request Chime plugin for Code
 # Permission Request Chime (macOS)
 
 This plugin is automatic once installed and enabled. It uses Codex's
-`PermissionRequest` lifecycle hook to play a local macOS sound whenever Codex
-creates an approval request.
+`PermissionRequest` lifecycle hook to play a local macOS sound when Codex routes
+an approval request to the user. Automatically reviewed requests stay silent.
 
 ## How it works
 
 - The hook lives at `hooks/hooks.json`.
 - The matcher is `*`, so it covers Bash, apply_patch/Edit/Write, MCP tools, and
   other permission-requesting tools that Codex exposes through the hook event.
+- `scripts/play-chime.sh` reads the current turn's reviewer metadata and exits
+  silently when `approvals_reviewer` is `auto_review`.
 - On macOS it plays `/System/Library/Sounds/Glass.aiff` with `afplay`.
 - If `afplay` is unavailable, it falls back to `osascript -e "beep 1"`.
 - If neither is available, it tries a terminal bell.

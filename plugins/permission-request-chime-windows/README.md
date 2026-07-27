@@ -3,15 +3,17 @@
 [Repository README](../../README.md) | [中文说明](../../README.zh-CN.md)
 
 This is the Windows version of Permission Request Chime. It plays a local
-Windows sound whenever Codex creates a permission request.
+Windows sound when Codex routes a permission request to the user. Automatically
+reviewed requests stay silent.
 
 macOS users should install `permission-request-chime` instead.
 
 ## Design
 
 The plugin uses Codex's `PermissionRequest` lifecycle hook instead of watching
-the screen. The hook matches every permission request and launches a small
-encoded `powershell.exe` command, which avoids nested quoting issues on Windows.
+the screen. The encoded PowerShell command reads the current turn's reviewer
+metadata and exits silently for automatic review. Its readable source is
+`scripts/play-chime.ps1`.
 
 The default command tries to play `CODEX_PERMISSION_CHIME_SOUND` when it points
 to a readable `.wav` file. If no custom sound is configured, it plays one short
@@ -66,10 +68,10 @@ On Windows, custom sounds should be `.wav` files readable by PowerShell.
 
 ## Security
 
-The default hook command only attempts to play a local `.wav` file, a Windows
-system sound, or a beep. Codex requires explicit trust before non-managed
-command hooks can run. The readable PowerShell source is kept in
-`scripts/play-chime.ps1`.
+The hook reads the current turn's local reviewer metadata and only attempts to
+play a local `.wav` file, a Windows system sound, or a beep. It does not make
+network requests. Codex requires explicit trust before non-managed command
+hooks can run.
 
 Review `hooks/hooks.json` before trusting it.
 

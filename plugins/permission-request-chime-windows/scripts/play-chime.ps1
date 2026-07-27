@@ -1,6 +1,54 @@
 $ErrorActionPreference = "SilentlyContinue"
 $ProgressPreference = "SilentlyContinue"
 
+function Get-ApprovalsReviewer {
+    try {
+        $hookText = [Console]::In.ReadToEnd()
+        if ([string]::IsNullOrWhiteSpace($hookText)) {
+            return $null
+        }
+
+        $hookInput = $hookText | ConvertFrom-Json
+        $transcriptPath = [string]$hookInput.transcript_path
+        $turnId = [string]$hookInput.turn_id
+        if (-not $transcriptPath -or -not $turnId -or
+            -not (Test-Path -LiteralPath $transcriptPath -PathType Leaf)) {
+            return $null
+        }
+
+        $needle = '"turn_id":"' + $turnId + '"'
+        $reviewer = $null
+        foreach ($line in [System.IO.File]::ReadLines($transcriptPath)) {
+            if (-not $line.Contains('"type":"turn_context"') -or
+                -not $line.Contains($needle)) {
+                continue
+            }
+
+            try {
+                $entry = $line | ConvertFrom-Json
+                if ($entry.type -eq "turn_context" -and
+                    [string]$entry.payload.turn_id -eq $turnId) {
+                    $reviewer = [string]$entry.payload.approvals_reviewer
+                }
+            } catch {}
+        }
+
+        return $reviewer
+    } catch {
+        return $null
+    }
+}
+
+$reviewer = Get-ApprovalsReviewer
+if ($reviewer -eq "auto_review" -or $reviewer -eq "guardian_subagent") {
+    exit 0
+}
+
+if ($env:CODEX_PERMISSION_CHIME_DRY_RUN -eq "1") {
+    Write-Output "chime"
+    exit 0
+}
+
 $media = Join-Path $env:WINDIR "Media"
 $candidates = @()
 if ($env:CODEX_PERMISSION_CHIME_SOUND) {

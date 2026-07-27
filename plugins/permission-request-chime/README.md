@@ -3,15 +3,16 @@
 [Repository README](../../README.md) | [中文说明](../../README.zh-CN.md)
 
 This is the macOS version of Permission Request Chime. It plays a local macOS
-sound whenever Codex creates a permission request.
+sound when Codex routes a permission request to the user. Automatically reviewed
+requests stay silent.
 
 Windows users should install `permission-request-chime-windows` instead.
 
 ## Design
 
 The plugin uses Codex's `PermissionRequest` lifecycle hook instead of watching
-the screen. The hook matches every permission request and launches a small
-`/bin/sh` command.
+the screen. The hook launches `scripts/play-chime.sh`, which reads the current
+turn's reviewer metadata and exits silently for automatic review.
 
 The default command plays `/System/Library/Sounds/Glass.aiff` with `afplay`.
 If `afplay` is unavailable, it falls back to `osascript -e "beep 1"`, then to a
@@ -51,9 +52,10 @@ Useful macOS built-in options:
 
 ## Security
 
-The default hook command only attempts to play a local sound file, run a system
-beep, or emit a terminal bell. Codex requires explicit trust before non-managed
-command hooks can run.
+The hook reads the current turn's local reviewer metadata and only attempts to
+play a local sound file, run a system beep, or emit a terminal bell. It does not
+make network requests. Codex requires explicit trust before non-managed command
+hooks can run.
 
 Review `hooks/hooks.json` before trusting it.
 

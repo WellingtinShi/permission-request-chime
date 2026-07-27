@@ -8,7 +8,7 @@
 
 - Codex 等你批准时，macOS 和 Windows 都能响一声了
 - Permission Request Chime 现在有 Windows 版了
-- 别让 Codex 在后台干等：提示音插件 v0.2.2
+- 别让 Codex 在后台干等：提示音插件 v0.2.4
 
 ## 图片顺序
 
@@ -39,8 +39,9 @@ permission-request-chime-windows
 
 用途还是那个用途。
 
-Codex 创建 permission request 时，本地响一声。
+Codex 把 permission request 交给你审批时，本地响一声。
 听到声音，再回来点 Allow。
+自动审批处理的请求保持安静。
 
 不截图。
 不识别窗口。
@@ -57,7 +58,7 @@ Windows 版走 PowerShell。
 
 安装 marketplace：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.4
 
 这条命令只是添加插件来源。
 
@@ -87,7 +88,7 @@ https://github.com/WellingtinShi/permission-request-chime/blob/main/README.zh-CN
 ```text
 安装命令：
 
-codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.2
+codex plugin marketplace add WellingtinShi/permission-request-chime --ref v0.2.4
 
 命令只是添加 marketplace。
 之后去 Codex plugin directory 里按系统安装一个：
